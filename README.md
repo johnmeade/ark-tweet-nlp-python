@@ -1,7 +1,38 @@
 ark-tweet-nlp-python
 ====================
 
-Simple Python wrapper around runTagger.sh of ark-tweet-nlp. It passes a list of tweets to runTagger.sh and parses the result into a list of lists of tuples, each tuple represents the (token, type, confidence). 
+
+Modifications
+--------------
+
+Modified August 2017 by John Meade
+* Add Python 3 support (Python 2.7+ still works)
+* Add persistent java process support. Queries made after the first query will be about 50x faster (try the demo at the bottom of the `CMUTweetTagger.py` file).
+* Add convenient class structure with `with` block support
+
+**Usage 1**
+```python
+tw_tag = TweetTagger( jarpath='path/to/ark-tweet-nlp-0.3.2.jar' )
+pos = tw_tag.batch([ 'example tweet 1', 'exmaple tweet 2' ])
+print(str(pos))
+tw_tag.kill()
+```
+
+**Usage 2**
+```python
+with TweetTagger( jarpath='path/to/ark-tweet-nlp-0.3.2.jar' ) as tw_tag:
+    pos = tw_tag.batch([ 'example tweet 1', 'exmaple tweet 2' ])
+    print(str(pos))
+```
+
+A brief reference to the CONLL output format can be found in the `CMUTweetTagger.py` file.
+
+
+Original readme (usage instructions incorrect):
+------------------------------------------------
+
+
+Simple Python wrapper around runTagger.sh of ark-tweet-nlp. It passes a list of tweets to runTagger.sh and parses the result into a list of lists of tuples, each tuple represents the (token, type, confidence).
 
 Wraps up:
 
@@ -14,7 +45,7 @@ Lives here:
 
 Usage:
 -----
-   
+
     >>> import CMUTweetTagger
     >>> print CMUTweetTagger.runtagger_parse(['example tweet 1', 'example tweet 2'])
     >>> [[('example', 'N', 0.979), ('tweet', 'V', 0.7763), ('1', '$', 0.9916)], [('example', 'N', 0.979), ('tweet', 'V', 0.7713), ('2', '$', 0.5832)]]
@@ -63,4 +94,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 Copyright (c) 2013 Ian Ozsvald
-
