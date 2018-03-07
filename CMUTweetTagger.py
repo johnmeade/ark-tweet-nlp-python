@@ -124,7 +124,7 @@ class TweetTagger:
 
 
 if __name__ == "__main__":
-    with TweetTagger( jarpath='vendor/ark-tweet-nlp-0.3.2/ark-tweet-nlp-0.3.2.jar' ) as tw_tag:
+    with TweetTagger( jarpath='vendor/ark-tweet-nlp-0.3.2.jar' ) as tw_tag:
         print( "\nTweet PoS demo (first call will be slow while Java is booting up)")
 
         def demo(tweets):
